@@ -11,4 +11,4 @@
 <br>
 
 ### Motivation
-Too lazy to look for a website that does this job without placing 34578340748 ads in the middle of the screen.
+Too lazy to look for a website that does this job without placing 1000 ads in the middle of the screen.
