@@ -67,6 +67,18 @@
 
         player.loadVideoById(id);
       }
+      
+      window.onload = function() {
+        var params = new URLSearchParams(window.location.search);
+        
+        var query = params.get("v") || params.get("video") || params.get("url");
+        
+        if (!query) {
+          return;
+        }
+        
+        playVideoWithThisQuery(query);
+      }
 
       input.onchange = ({ target: { value } }) => {
         playVideoWithThisQuery(value);
