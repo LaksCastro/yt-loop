@@ -62,7 +62,7 @@
 
         var isUrl = /^(http|https)/g.test(query);
 
-        let id = null;
+        var id = null;
 
         if (isUrl) {
           var endpoint = new URL(query);
@@ -73,6 +73,8 @@
         }
 
         currentId = id;
+        
+        setGetParam("video", id);
 
         player.loadVideoById(id);
       }
@@ -109,6 +111,18 @@
       function onPlayerStateChange(event) {
         if (player.getPlayerState() === 0) {
           playVideoWithThisQuery(currentId);
+        }
+      }
+      
+      function setGetParam(key, value) {
+        if (history.pushState) {
+          var params = new URLSearchParams(window.location.search);
+          
+          params.set(key, value);
+          
+          var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + params.toString();
+          
+          window.history.pushState({path:newUrl},'',newUrl);
         }
       }
     </script>
