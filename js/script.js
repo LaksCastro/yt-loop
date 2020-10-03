@@ -1,8 +1,6 @@
 var player;
       var currentId;
-
       var input = document.querySelector("input");
-
       function playVideoWithThisQuery(query) {
         if (!player) {
           return;
