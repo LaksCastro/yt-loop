@@ -4,127 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Youtube Loop</title>
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-
-        justify-content: center;
-        align-items: center;
-
-        height: 100vh;
-        min-height: 560px;
-
-        padding: 1rem;
-      }
-
-      input {
-        margin-bottom: 20px;
-        padding: 1rem 2rem;
-
-        width: 100%;
-        max-width: 500px;
-      }
-      
-      .label {
-        display: block;
-        padding: 1rem;
-      }
-    </style>
+    <link rel="stylesheet" href="/yt-loop/css/style.css">
   </head>
   <body>
     <input type="text" placeholder="Youtube ID or Youtube URL" />
-
     <div id="player"></div>
-    
     <a class="label" href="https://github.com/LaksCastro/yt-loop" target="_blank" rel="noopener noreferrer external">
       <img src="https://img.shields.io/badge/Github-Repository-lightgrey" />
     </a>
-
-    <script>
-      var tag = document.createElement("script");
-
-      tag.src = "https://www.youtube.com/iframe_api";
-
-      var firstScriptTag = document.getElementsByTagName("script")[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    </script>
-    <script>
-      var player;
-      var currentId;
-
-      var input = document.querySelector("input");
-
-      function playVideoWithThisQuery(query) {
-        if (!player) {
-          return;
-        }
-
-        var isUrl = /^(http|https)/g.test(query);
-
-        var id = null;
-
-        if (isUrl) {
-          var endpoint = new URL(query);
-
-          id = endpoint.searchParams.get("v");
-        } else {
-          id = query;
-        }
-
-        currentId = id;
-        
-        setGetParam("video", id);
-
-        player.loadVideoById(id);
-      }
-      
-      window.onload = function() {
-        var params = new URLSearchParams(window.location.search);
-        
-        var query = params.get("v") || params.get("video") || params.get("url");
-        
-        if (!query) {
-          return;
-        }
-        
-        input.value = query;
-        
-        playVideoWithThisQuery(query);
-      }
-
-      input.onchange = ({ target: { value } }) => {
-        playVideoWithThisQuery(value);
-      };
-
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player("player", {
-          height: "360",
-          width: "640",
-          events: {
-            onReady: function () {},
-            onStateChange: onPlayerStateChange,
-          },
-        });
-      }
-
-      function onPlayerStateChange(event) {
-        if (player.getPlayerState() === 0) {
-          playVideoWithThisQuery(currentId);
-        }
-      }
-      
-      function setGetParam(key, value) {
-        if (history.pushState) {
-          var params = new URLSearchParams(window.location.search);
-          
-          params.set(key, value);
-          
-          var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + params.toString();
-          
-          window.history.pushState({ path: newUrl }, '', newUrl);
-        }
-      }
-    </script>
+    <script src="/yt-loop/js/iframe.js"></script>
+    <script src="/yt-loop/js/script.js"></script>
   </body>
 </html>
