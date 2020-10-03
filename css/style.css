@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    min-height: 560px;
+
+    padding: 1rem;
+  }
+
+  input {
+    margin-bottom: 20px;
+    padding: 1rem 2rem;
+
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .label {
+    display: block;
+    padding: 1rem;
+  }
